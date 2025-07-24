@@ -1,0 +1,56 @@
+name: Release Charts
+
+on:
+  push:
+    branches-ignore:
+      - gh-pages
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      - name: Get changed charts
+        id: changed-files
+        uses: tj-actions/changed-files@v35
+        with:
+          dir_names_max_depth: 2
+          dir_names: true
+          dir_names_exclude_root: true
+          files: charts/**
+      - name: Update chart files if required
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            export VERSION=""
+          else
+            export VERSION="-beta.${{ github.run_number }}"
+          fi
+          for dir in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$dir was changed"
+            chart="$dir/Chart.yaml"
+            sed -i "/version:/s/$/$VERSION/" $chart
+            
+            echo -e "\n\nFinal $chart version:"
+            cat $chart
+            echo -e "\n\n"
+          done
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.4.0
+
+      - name: Run chart-releaser
+        uses: stecky/yet-another-chart-releaser-action@v1
+        with:
+          packages_with_index: true
+        env:
+          YACR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
