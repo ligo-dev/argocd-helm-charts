@@ -22,19 +22,19 @@ spec:
     spec:
       containers:
       - name: {{ .Release.Name }}
-        image: {{ .deployment.image }}:{{ .deployment.tag }}
+        image: {{ .Values.deployment.ecr | default "249971569886.dkr.ecr.us-east-1.amazonaws.com" }}/{{ .Values.deployment.image | default "dummy" }}:{{ .Values.deployment.tag | default "latest" }}
         imagePullPolicy: Always
         resources:
             requests:
-              memory: {{ .deployment.memory | default "128Mi" }}
-              ephemeral-storage: {{ .deployment.ephemeral_storage | default "1Gi" }}
-              cpu: {{ .deployment.cpu | default "500m" }}
+              memory: {{ .Values.deployment.memory | default "128Mi" }}
+              ephemeral-storage: {{ .Values.deployment.ephemeral_storage | default "1Gi" }}
+              cpu: {{ .Values.deployment.cpu | default "500m" }}
             limits:
-              memory: {{ .deployment.memory | default "128Mi" }}
-              ephemeral-storage: {{ .deployment.ephemeral_storage | default "1Gi" }}
-              cpu: {{ .deployment.cpu | default "500m" }}
+              memory: {{ .Values.deployment.memory | default "128Mi" }}
+              ephemeral-storage: {{ .Values.deployment.ephemeral_storage | default "1Gi" }}
+              cpu: {{ .Values.deployment.cpu | default "500m" }}
         envFrom:
         - secretRef:
           name: {{ .Release.Name }}
         ports:
-        - containerPort: {{ .deployment.port | default 3000 }}
+        - containerPort: {{ .Values.deployment.port | default 3000 }}

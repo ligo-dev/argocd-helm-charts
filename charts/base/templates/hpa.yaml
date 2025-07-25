@@ -1,4 +1,4 @@
-{{- if  .hpa   }}
+{{- if  .Values.hpa   }}
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
@@ -8,8 +8,8 @@ metadata:
     app: {{ $.Release.Name }}
     helm.sh/chart: {{ $.Chart.Version  }}
 spec:
-  minReplicas: {{ .hpa.maxReplicas | default 2 }}
-  maxReplicas: {{ .hpa.maxReplicas | default 4 }}
+  minReplicas: {{ .Values.hpa.maxReplicas | default 2 }}
+  maxReplicas: {{ .Values.hpa.maxReplicas | default 4 }}
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
