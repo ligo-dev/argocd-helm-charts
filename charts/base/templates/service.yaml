@@ -1,0 +1,19 @@
+{{- if  .Values.deployment }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{  $.Release.Name }}
+  labels:
+    app: {{ $.Release.Name }}
+    helm.sh/chart: {{ $.Chart.Version  }}
+spec:
+  type: ClusterIP
+  ports:
+  - port: {{ .Values.deployment.port | default 3000 }}
+    protocol: "TCP"
+    targetPort: {{ .Values.deployment.port | default 3000 }}
+  selector:
+    app: {{ $.Release.Name }}
+
+{{ end }}

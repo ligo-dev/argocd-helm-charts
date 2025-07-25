@@ -1,0 +1,17 @@
+{{- if  .Values.pdb   }}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ $.Release.Name }}
+  labels:
+    app: {{ $.Release.Name }}
+    helm.sh/chart: {{ $.Chart.Version  }}
+spec:
+  minAvailable: {{ .Values.pdb | default 1 }}
+  selector:
+    matchLabels:
+      app: {{ $.Release.Name }}
+      helm.sh/chart: {{ $.Chart.Version  }}
+
+{{ end }}

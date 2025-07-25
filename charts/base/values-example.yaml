@@ -1,0 +1,16 @@
+---
+external_secrets:
+  secret: devops-shared-service/etl/etl-payfi-trx
+#
+deployment:
+  autoscaling: 1
+  port: 3000
+  image: "249971569886.dkr.ecr.us-east-1.amazonaws.com/etl-payfi-trx"
+  tag: "1.0.0"
+#
+nginx_ingress:
+  url: dummy.ligo.live
+  annotations:
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/proxy-body-size: 20m
+    nginx.ingress.kubernetes.io/session-cookie-hash: sha2
