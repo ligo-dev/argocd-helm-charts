@@ -1,13 +1,13 @@
 ---
 external_secrets:
-  secret: devops-shared-service/etl/etl-payfi-trx
-#
+  secret: devops-shared-service/base
+
 deployment:
   autoscaling: "1"
   port: "3000"
-  image: "249971569886.dkr.ecr.us-east-1.amazonaws.com/etl-payfi-trx"
+  image: "249971569886.dkr.ecr.us-east-1.amazonaws.com/base"
   tag: "1.0.0"
-#
+
 nginx_ingress:
   url: dummy.ligo.live
   annotations:

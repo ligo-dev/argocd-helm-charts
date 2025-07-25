@@ -10,9 +10,9 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.deployment.port | default 3000 }}
+  - port: {{ .deployment.port | default 3000 }}
     protocol: "TCP"
-    targetPort: {{ .Values.deployment.port | default 3000 }}
+    targetPort: {{ .deployment.port | default 3000 }}
   selector:
     app: {{ $.Release.Name }}
 

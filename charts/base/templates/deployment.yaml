@@ -22,19 +22,19 @@ spec:
     spec:
       containers:
       - name: {{ .Release.Name }}
-        image: {{ .Values.deployment.image }}:{{ .Values.deployment.tag }}
+        image: {{ .deployment.image }}:{{ .deployment.tag }}
         imagePullPolicy: Always
         resources:
             requests:
-              memory: {{ .Values.deployment.memory | default "128Mi" }}
-              ephemeral-storage: {{ .Values.deployment.ephemeral_storage | default "1Gi" }}
-              cpu: {{ .Values.deployment.cpu | default "500m" }}
+              memory: {{ .deployment.memory | default "128Mi" }}
+              ephemeral-storage: {{ .deployment.ephemeral_storage | default "1Gi" }}
+              cpu: {{ .deployment.cpu | default "500m" }}
             limits:
-              memory: {{ .Values.deployment.memory | default "128Mi" }}
-              ephemeral-storage: {{ .Values.deployment.ephemeral_storage | default "1Gi" }}
-              cpu: {{ .Values.deployment.cpu | default "500m" }}
+              memory: {{ .deployment.memory | default "128Mi" }}
+              ephemeral-storage: {{ .deployment.ephemeral_storage | default "1Gi" }}
+              cpu: {{ .deployment.cpu | default "500m" }}
         envFrom:
         - secretRef:
           name: {{ .Release.Name }}
         ports:
-        - containerPort: {{ .Values.deployment.port | default 3000 }}
+        - containerPort: {{ .deployment.port | default 3000 }}
