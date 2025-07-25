@@ -3,6 +3,16 @@ entries:
   base:
   - apiVersion: v2
     appVersion: 1.0.1
+    created: "2025-07-25T15:33:40.228242913Z"
+    description: base helm chart for kubernetes
+    digest: 3ee937511d62c31858f477170a1434c82455e75f4d06969820dbdb16946be55e
+    name: base
+    type: application
+    urls:
+    - base-1.0.1-beta.8.tgz
+    version: 1.0.1-beta.8
+  - apiVersion: v2
+    appVersion: 1.0.1
     created: "2025-07-25T15:27:24.411130486Z"
     description: base helm chart for kubernetes
     digest: 60447780a2eed928acb5cefa086f50255b2b0fae5187193e3826a687355c7b53
@@ -51,4 +61,4 @@ entries:
     urls:
     - base-1.0.0-beta.2.tgz
     version: 1.0.0-beta.2
-generated: "2025-07-25T15:27:24.411166294Z"
+generated: "2025-07-25T15:33:40.228290622Z"
