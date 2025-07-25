@@ -7,10 +7,7 @@ metadata:
     app: {{ $.Release.Name }}
     helm.sh/chart: {{ $.Chart.Version  }}
 spec:
-  revisionHistoryLimit: 0
-  {{- if not .Values.deployment.autoscaling  }}
-  replicas: {{ .Values.deployment.autoscaling | default 1 }}
-  {{- end }}
+  replicas: 1
   selector:
     matchLabels:
       app: {{ $.Release.Name }}
@@ -25,7 +22,7 @@ spec:
     spec:
       containers:
       - name: {{ .Release.Name }}
-        image: {{ .Values.deployment.image }}:{{ .Values.deployment.tag }}
+        image: {{ .Values.deployment.ecr | default "249971569886.dkr.ecr.us-east-1.amazonaws.com" }}/{{ .Values.deployment.image | default "dummy" }}:{{ .Values.deployment.tag | default "latest" }}
         imagePullPolicy: Always
         resources:
             requests:
@@ -36,8 +33,10 @@ spec:
               memory: {{ .Values.deployment.memory | default "128Mi" }}
               ephemeral-storage: {{ .Values.deployment.ephemeral_storage | default "1Gi" }}
               cpu: {{ .Values.deployment.cpu | default "500m" }}
+        {{- if  .Values.external_secrets }}
         envFrom:
         - secretRef:
           name: {{ .Release.Name }}
+        {{ end  }}
         ports:
         - containerPort: {{ .Values.deployment.port | default 3000 }}
