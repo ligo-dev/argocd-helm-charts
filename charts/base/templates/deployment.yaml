@@ -8,8 +8,10 @@ metadata:
     helm.sh/chart: {{ $.Chart.Version  }}
 spec:
   revisionHistoryLimit: 0
-  {{- if not .Values.deployment.autoscaling  }}
+  {{- if .Values.deployment.autoscaling  }}
   replicas: {{ .Values.deployment.autoscaling | default 1 }}
+  {{ else }}
+  replicas: 1
   {{- end }}
   selector:
     matchLabels:
