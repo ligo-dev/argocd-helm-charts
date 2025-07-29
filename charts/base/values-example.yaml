@@ -1,6 +1,6 @@
 ---
 external_secrets:
-  secret: devops-shared-service/base
+  secret: cluster-dev/core/core_auth_payfi
 
 deployment:
   autoscaling: "1"
