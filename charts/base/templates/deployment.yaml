@@ -35,8 +35,8 @@ spec:
               cpu: {{ .Values.deployment.cpu | default "500m" }}
         {{- if  .Values.external_secrets }}
         envFrom:
-        - secretRef:
-          name: {{ .Release.Name }}
+          - secretRef:
+              name: {{ .Release.Name }}
         {{ end  }}
         ports:
         - containerPort: {{ .Values.deployment.port | default 3000 }}
