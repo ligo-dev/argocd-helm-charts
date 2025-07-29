@@ -20,14 +20,13 @@
 
 -- privado
 
-	helm repo add argocd-helm-charts https://raw.githubusercontent.com/ligo-dev/argocd-helm-charts/gh-pages --username tp-gcetraro --password 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  
+	helm repo add argocd-helm-charts https://raw.githubusercontent.com/ligo-dev/argocd-helm-charts/gh-pages --username pepe --password pepe  
 
 -- publico
 
 	helm repo add argocd-helm-charts https://raw.githubusercontent.com/ligo-dev/argocd-helm-charts/gh-pages  
 
 -- pull
-
 
 	helm dependency build  
 
