@@ -22,4 +22,4 @@ spec:
         path: /
         pathType: Prefix
 
-{{ end  }}
+{{ end }}
