@@ -3,10 +3,29 @@ external_secrets:
   secret: cluster-dev/core/core_auth_payfi
 
 deployment:
+  #
   autoscaling: "1"
+  #
   port: "3000"
   image: "249971569886.dkr.ecr.us-east-1.amazonaws.com/base"
   tag: "1.0.0"
+  #
+  requests_memory: "128Mi"
+  requests_ephemeral_storage: "1Gi"
+  requests_cpu: "500m"
+  #
+  limits_memory: "256Mi"
+  limits_ephemeral_storage: "1Gi"
+  limits_cpu: "1000m"
+
+hpa:
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+pdb:
+  minAvailable: 1
+  maxUnavailable: 1
 
 nginx_ingress:
   url: dummy.ligo.live

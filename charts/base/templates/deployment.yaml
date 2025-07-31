@@ -1,3 +1,4 @@
+{{- if  .Values.deployment }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -25,14 +26,14 @@ spec:
         image: {{ .Values.deployment.ecr | default "249971569886.dkr.ecr.us-east-1.amazonaws.com" }}/{{ .Values.deployment.image | default "dummy" }}:{{ .Values.deployment.tag | default "latest" }}
         imagePullPolicy: Always
         resources:
-            requests:
-              memory: {{ .Values.deployment.memory | default "128Mi" }}
-              ephemeral-storage: {{ .Values.deployment.ephemeral_storage | default "1Gi" }}
-              cpu: {{ .Values.deployment.cpu | default "500m" }}
-            limits:
-              memory: {{ .Values.deployment.memory | default "128Mi" }}
-              ephemeral-storage: {{ .Values.deployment.ephemeral_storage | default "1Gi" }}
-              cpu: {{ .Values.deployment.cpu | default "500m" }}
+          requests:
+            memory: {{ .Values.deployment.requests_memory | default "256Mi" }}
+            ephemeral-storage: {{ .Values.deployment.requests_ephemeral_storage | default "1Gi" }}
+            cpu: {{ .Values.deployment.requests_cpu | default "500m" }}
+          limits:
+            memory: {{ .Values.deployment.limits_memory | default "256Mi" }}
+            ephemeral-storage: {{ .Values.deployment.limits_ephemeral_storage | default "1Gi" }}
+            cpu: {{ .Values.deployment.limits_cpu | default "500m" }}
         {{- if  .Values.external_secrets }}
         envFrom:
           - secretRef:
@@ -40,3 +41,5 @@ spec:
         {{ end  }}
         ports:
         - containerPort: {{ .Values.deployment.port | default 3000 }}
+
+{{ end  }}
