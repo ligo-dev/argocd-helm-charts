@@ -16,4 +16,4 @@ spec:
     name: {{ .Release.Name }}
   targetCPUUtilizationPercentage: {{ .Values.hpa.targetCPUUtilizationPercentage | default 80 }}
 
-{{- end }}
+{{ end }}

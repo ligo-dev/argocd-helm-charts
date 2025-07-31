@@ -42,4 +42,4 @@ spec:
         ports:
         - containerPort: {{ .Values.deployment.port | default 3000 }}
 
-{{ end  }}
+{{ end }}
