@@ -7,7 +7,7 @@ deployment:
   replicas: "2"
   #
   port: "3000"
-  image: "249971569886.dkr.ecr.us-east-1.amazonaws.com/base"
+  image: "1234567890.dkr.ecr.us-east-1.amazonaws.com/base"
   tag: "1.0.0"
   #
   requests_memory: "128Mi"
@@ -18,6 +18,14 @@ deployment:
   limits_ephemeral_storage: "1Gi"
   limits_cpu: "1000m"
 
+probes:
+  path: "/"
+  initialDelaySeconds: "5"
+  periodSeconds: "10"
+  timeoutSeconds: "3"
+  successThreshold: "1"
+  failureThreshold: "3"
+
 hpa:
   minReplicas: 2
   maxReplicas: 10
@@ -27,9 +35,25 @@ pdb:
   minAvailable: 1
   maxUnavailable: 1
 
-nginx_ingress:
+ingress_nginx:
   url: dummy.ligo.live
   annotations:
     nginx.ingress.kubernetes.io/affinity: cookie
     nginx.ingress.kubernetes.io/proxy-body-size: 20m
     nginx.ingress.kubernetes.io/session-cookie-hash: sha2
+
+ingress_alb:
+  url: dummy.ligo.live
+  #annotations:
+
+service_account:
+  #
+  aws:
+    account_id: "1234567890"
+    role_name: test
+  #
+  gcp:
+    project: test
+
+volume:
+  volumeSize: "5Gi"
