@@ -12,7 +12,8 @@ deployment:
   tag: "1.0.0"
   #
   port: "3000"
-  service_type: None
+  #clusterIP: "None"
+  #service_type: ClusterIP
   #
   requests_memory: "128Mi"
   requests_ephemeral_storage: "1Gi"

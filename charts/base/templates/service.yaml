@@ -8,6 +8,7 @@ metadata:
     app: {{ $.Release.Name }}
     helm.sh/chart: {{ $.Chart.Version  }}
 spec:
+  clusterIP: {{ .Values.deployment.cluster_ip | default "None" }}
   type: {{ .Values.deployment.service_type | default "ClusterIP" }}
   ports:
   - port: {{ .Values.deployment.port | default 3000 }}
