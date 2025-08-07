@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
-name: base
+name: base-aws
 description: base helm chart for kubernetes
 type: application
-version: 3.0.0
-appVersion: 3.0.0
+version: 1.0.0
+appVersion: 1.0.0

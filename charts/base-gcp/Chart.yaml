@@ -1,6 +1,6 @@
 ---
 apiVersion: v2
-name: base
+name: base-gcp
 description: base helm chart for kubernetes
 type: application
 version: 1.0.0
