@@ -1,9 +1,12 @@
-{{- if  .Values.nginx_ingress }}
+{{- if  .Values.ingress_nginx }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  {{- with .Values.nginx_ingress.annotations }}
+  labels:
+    app: {{ $.Release.Name }}
+    helm.sh/chart: {{ $.Chart.Version  }}
+  {{- with .Values.ingress_nginx.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{ end  }}
@@ -11,7 +14,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ .Values.nginx_ingress.url }}
+  - host: {{ .Values.ingress_nginx.url }}
     http:
       paths:
       - backend:
@@ -22,4 +25,4 @@ spec:
         path: /
         pathType: Prefix
 
-{{ end  }}
+{{ end }}

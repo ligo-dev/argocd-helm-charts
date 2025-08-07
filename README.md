@@ -32,6 +32,7 @@
 
 ## Test
 
-	helm upgrade dummy --install . -f values-example.yaml -n dummy --dry-run --debug
+	helm upgrade dummy --install . -f values-example.yaml --dry-run --debug
 
-	helm upgrade eks-test-ci --install . -f values-example.yaml
+	helm upgrade dummy --install . -f values-example.yaml
+
