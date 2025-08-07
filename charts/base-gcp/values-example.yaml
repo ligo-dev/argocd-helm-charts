@@ -1,5 +1,4 @@
 ---
-#external_secrets_alfa
 external_secrets:
   secret: cluster/dummy-app
 
@@ -7,11 +6,12 @@ deployment:
   #
   replicas: "2"
   #
-  ecr: "1234567890.dkr.ecr.us-east-1.amazonaws.com"
+  ecr: "gcr.io/ligo-dev-327813"
   image: dummy
   tag: "1.0.0"
   #
   port: "3000"
+  clusterIP: "None" # for gcp
   service_type: ClusterIP
   #
   requests_memory: "128Mi"
@@ -40,19 +40,14 @@ pdb:
   maxUnavailable: 1
 
 ingress_nginx:
-  url: dummy.test.com
+  url: dummy.ligo.live
   annotations:
     nginx.ingress.kubernetes.io/affinity: cookie
     nginx.ingress.kubernetes.io/proxy-body-size: 20m
     nginx.ingress.kubernetes.io/session-cookie-hash: sha2
 
-ingress_alb:
-  url: dummy.ligo.live
-  #annotations:
-
 service_account:
-  account_id: "1234567890"
-  role_name: test
+  project: test
 
 volume:
   volumeSize: "5Gi"
