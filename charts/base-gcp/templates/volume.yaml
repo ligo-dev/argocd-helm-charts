@@ -1,0 +1,16 @@
+{{- if  .Values.volume }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ $.Release.Name }}
+    helm.sh/chart: {{ $.Chart.Version  }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.volume.volumeSize }}
+{{- end }}
