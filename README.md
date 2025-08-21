@@ -36,3 +36,9 @@
 
 	helm upgrade dummy --install . -f values-example.yaml
 
+## clouds
+
+	Hay una version por cada cloud
+
+		- base-aws
+		- base-gcp
